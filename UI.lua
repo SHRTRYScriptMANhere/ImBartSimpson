@@ -45,10 +45,10 @@ local char = plr.Character or plr.CharacterAdded:Wait()
 local ts = plrgui:WaitForChild("TeamSelector")
 
 --scirpt
-local MainTab = Window:CreateTab("Main", "House")
+local MainTab = Window:CreateTab("Main", 0)
 local Section = MainTab:CreateSection("Gui Related")
 
-local TeamToggle = Tab:CreateToggle({
+local TeamToggle = MainTab:CreateToggle({
    Name = "Team Selector (ONLY USE IF NOT ALREADY ROLE, IF YOU SELECT ANOTHER TEAM WHILE BEING ALREADY A TEAM, YOU WILL GET KICKED)",
    CurrentValue = true,
    Flag = "TToggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
