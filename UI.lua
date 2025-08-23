@@ -45,7 +45,7 @@ local char = plr.Character or plr.CharacterAdded:Wait()
 local ts = plrgui:WaitForChild("TeamSelector")
 
 --scirpt
-local MainTab = Window:CreateTab("Main", "house")
+local MainTab = Window:CreateTab("Main", "House")
 local Section = MainTab:CreateSection("Gui Related")
 
 local TeamToggle = Tab:CreateToggle({
