@@ -43,6 +43,10 @@ local plr = game.Players.LocalPlayer
 local plrgui = plr:WaitForChild("PlayerGui")
 local char = plr.Character or plr.CharacterAdded:Wait()
 local ts = plrgui:WaitForChild("TeamSelector")
+local TPtext = ""
+local grav = game.Workspace.Gravity
+local hum = char.Humanoid
+local hrp = char.HumanoidRootPart
 
 --scirpt
 local MainTab = Window:CreateTab("Main", 0)
@@ -58,5 +62,71 @@ local TeamToggle = MainTab:CreateToggle({
   		else
 						ts.Enabled = false
       end
+   end,
+})
+
+local PlrTab = Window:CreateTab("Player", "user") -- Title, Image
+
+local TPInput = PlrTab:CreateInput({
+   Name = "Player username",
+   CurrentValue = "",
+   PlaceholderText = "username",
+   RemoveTextAfterFocusLost = false,
+   Flag = "Input1",
+   Callback = function(Text)
+   TPtext = Text
+   end,
+})
+local TPButton = PlrTab:CreateButton({
+   Name = "Tp to Player",
+   Callback = function()
+   char.HumanoidRootPart.CFrame = game.Workspace[Text].HumanoidRootPart.CFrame
+   end,
+})
+local OfButton = PlrTab:CreateButton({
+   Name = "Offset Y by 30 (use if ur urself)",
+   Callback = function()
+   hrp.CFrame = CFrame.new(hrp.Position) + Vector3.new(0, 30, 0)
+   end,
+})
+
+local HSection = PlrTab:CreateSection("Humanoid Related")
+
+local WSSlider = PlrTab:CreateSlider({
+   Name = "Walkspeed",
+   Range = {13, 200},
+   Increment = 1,
+   Suffix = "namber",
+   CurrentValue = 13,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   hum.WalkSpeed = Value
+   end,
+})
+local JPSlider = PlrTab:CreateSlider({
+   Name = "JumpPower",
+   Range = {1, 150},
+   Increment = 1,
+   Suffix = "applez",
+   CurrentValue = 30,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   	hum.JumpPower = Value
+	hum.JumpHeight = (Value^2) / (2 * grav)
+   end,
+})
+
+local VTab = Window:CreateTab("Visual", "eye") -- Title, Image
+local blr = Instance.new("Blur", game.Lighting)
+
+local VISlider = VTab:CreateSlider({
+   Name = "Visual Impairment",
+   Range = {0, 100},
+   Increment = 0.5,
+   Suffix = "amount",
+   CurrentValue = 0,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   blr.Size = Value
    end,
 })
