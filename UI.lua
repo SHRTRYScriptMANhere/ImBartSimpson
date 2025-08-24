@@ -92,6 +92,12 @@ local OfButton = PlrTab:CreateButton({
 
 local HSection = PlrTab:CreateSection("Humanoid Related")
 
+local SitButton = PlrTab:CreateButton({
+   Name = "Sit",
+   Callback = function()
+   hum.Sit = true
+   end,
+})
 local WSSlider = PlrTab:CreateSlider({
    Name = "Walkspeed",
    Range = {13, 200},
